@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hundo: A Coding Challenge by Daniel Monastirsky</title>
+
+    <!-- Bootstrap CSS -->
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Allan:wght@400;700&family=Bebas+Neue&family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Dev Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css"
+    />
+    <link href="/css/site.css" rel="stylesheet" />
+    <link href="/css/prism.css" rel="stylesheet" />
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <img src="/img/FOOTER (5).png" height="60" />
+            Hundo
+          </a>
+          <!-- TODO: Customize Mobile Menu Button -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-dm">
+              <i class="bi bi-list"></i>
+            </span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="/index.html"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/app.html">The App</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/code.html">The Code</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="https://github.com/danvitmon"
+                  >The Repo</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="https://danielmsportfolio.netlify.app/"
+                  >My Portfolio</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Blog</a>
+                <!-- CHANGE THIS -->
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container mt-3">
+      <h1 class="border-bottom border-2 border-dark">The Code</h1>
+      <div class="row">
+          <div class="col-12 col-lg-8">
+              <pre class="line-numbers">
+                  <code class="language-js">
+    function getValues(){
+    let fizzVal = document.getElementById("fizzNum").value;
+    let buzzVal = document.getElementById("buzzNum").value;
+    let stopVal = document.getElementById("stopNum").value;
+
+    fizzNumber = parseInt(fizzVal);
+    buzzNumber = parseInt(buzzVal);
+    stopNumber = parseInt(stopVal);
+
+    if(!Number.isInteger(fizzNumber) || !Number.isInteger(buzzNumber) || !Number.isInteger(stopNumber) || fizzNumber < 1 || buzzNumber &lt 1 || stopNumber &lt 1){
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Please enter positive integers for all values.",
+            backdrop: false
+        });
+        return;
+    }
+
+    if(stopNumber > 5000){
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Please enter a Stop value below 5000",
+            backdrop: false,
+        });
+        return;
+    }
+
+    document.getElementById("fizzNum").value = fizzNumber;
+    document.getElementById("buzzNum").value = buzzNumber;
+    document.getElementById("stopNum").value = stopNumber;
+
+    let fbArr = generateFizzBuzz(fizzNumber, buzzNumber, stopNumber);
+    displayFizzBuzz(fbArr);
+    // pulls values from the user input boxes
+    // converts the values to numbers and checks to see if the numbers are within the criteria created
+}
+
+function generateFizzBuzz(fizzNumber, buzzNumber, stopNumber) {
+    let fbArr = [];
+    for (i = 1; i &lt= stopNumber; i++) {
+        let val = i%(fizzNumber*buzzNumber) == 0 ? "FizzBuzz" : i%fizzNumber == 0 ? "Fizz" : i%buzzNumber == 0 ? "Buzz" : "" + i;
+        fbArr.push(val);
+    }
+    return fbArr;
+    // checks which numbers are divisible by fizz, buzz, and fizz*buzz
+    // correctly assigns values to the numbers divisible by fizz, buzz, fizz*buzz, and non-divisible ones
+}
+
+function displayFizzBuzz(fbArr){
+    let table = document.getElementById("results");
+    let out = "&lttr>";
+    
+    for(i = 0; i &lt fbArr.length; i++){
+        let val = fbArr[i]
+        if(val == "Fizz"){
+            out += "&lttd class='table-warning'>Fizz&lt/td>";
+        }
+        else if(val == "Buzz"){
+            out += "&lttd class='table-success'>Buzz&lt/td>";
+        }
+        else if(val == "FizzBuzz"){
+            out += "&lttd class='table-danger'>FizzBuzz&lt/td>";
+        }
+        else{
+            out += "&lttd class='table-light'>" + val + "&lt/td>";
+        }
+
+        if(i%5 == 4){
+            out += "&lt/tr>&lttr>"
+        }
+    }
+
+    var tcount = fbArr.length;
+    while(tcount%5 != 0){
+        out += "&lttd class='table-light'>&lt/td>";
+        tcount++;
+    }
+
+    out += "&lt/tr>"
+
+    table.innerHTML = out;
+    // checks the values and assigns the correct table data to display the fizzbuzz/non-fizzbuzz values
+}
+                  </code>
+              </pre>
+          </div>
+          <div class="col-12 col-lg-4">
+              <p>
+                The code is structured in three functions. The first function gets the values from where the user inputs the Fizz values, the Buzz values, and the Stop values. The Fizz value is then labeled fizzNum, the Buzz value is labeled buzzNum, and the Stop value is labeled stopNum. These are then given an integer value and another label as fizzNumber for the fizzNum, buzzNumber for the buzzNum, and stopNumber for the stopNum. These are then stored in the fbArr, which uses the return statement to create an ordered list of all the numbers it has to sort through.
+
+              </p>
+              <h5>
+                The next function utilizes that same fbArr, and starts checking for divisible values. If a number is divisible by fizz and buzz, it will be assigned the FizzBuzz value. If it is divisible by fizz, it will be assigned the Fizz value. If it is divisible by buzz, it will be assigned the Buzz value.</h5>
+              <p>
+                The final function is responsible for checking which numbers have which values. If a number has Fizz assigned to it, it gets the Fizz HTML table data assigned to it and displayed. If a number has Buzz assigned to it, it gets the Buzz HTML table data assigned to it and displayed. If a number has FizzBuzz assigned to it, it gets the FizzBuzz HTML table data assigned to it and displayed. If a number has no value assigned to it, it simply gets the normal HTML table data assigned and displayed.
+              </p>
+          </div>
+      </div>
+  </main>
+
+    <footer class="py-3">
+      <div
+        class="footer-main py-3 row row-cols-1 row-cols-md-3 container-fluid align-items-center text-center"
+      >
+        <div class="col py-2">
+          <img src="/img/FOOTER (5).png" height="80" />
+        </div>
+        <div class="col text-md-end py-2">
+          <a href="https://www.linkedin.com/in/daniel-monastirsky-1625ba173"
+            ><i
+              class="bi bi-linkedin socialicons p-2"
+              style="font-size: 1.5em"
+            ></i
+          ></a>
+          <a href="https://github.com/danvitmon"
+            ><i
+              class="bi bi-github socialicons p-2"
+              style="font-size: 1.5em"
+            ></i
+          ></a>
+          <a href="https://twitter.com/my-profile"
+            ><i
+              class="bi bi-twitter socialicons p-2"
+              style="font-size: 1.5em"
+            ></i
+          ></a>
+          <a href="https://www.youtube.com/channel/UC8MUuKgHxmTa1aHw9DhV_LA"
+            ><i
+              class="bi bi-youtube socialicons p-2"
+              style="font-size: 1.5em"
+            ></i
+          ></a>
+        </div>
+        <div class="col text-light order-md-first text-md-start py-2">
+          &copy; 2023 Daniel Monastirsky
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="/js/prism.js"></script>
+
+    <script>
+        Prism.plugins.NormalizeWhitespace.setDefaults({
+            'remove-trailing': true,
+            'remove-indent': true,
+            'left-trim': true,
+            'right-trim': true
+        })
+    </script>
+  </body>
+</html>
